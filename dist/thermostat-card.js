@@ -79,7 +79,7 @@ class ThermostatCard extends LitElement {
           break;
         case "none":
           mainIcon = "mdi:hand-back-right-outline";
-          mainIconColor = "rgba(255, 255, 0, 1)";
+          mainIconColor = "rgba(255, 0, 255, 1)";
           break;
       }
     }
@@ -207,7 +207,6 @@ class ThermostatCard extends LitElement {
         border-radius: 12px;
       }
       
-      /* Mis à jour : Conteneur central pour aligner horizontalement la température réelle */
       .ambient-temp-container {
         display: flex;
         align-items: center;
@@ -216,14 +215,26 @@ class ThermostatCard extends LitElement {
         font-size: 13px;
         font-weight: 500;
         flex: 1;
-        justify-content: center; /* Centre la valeur dans l'espace disponible */
+        justify-content: center;
       }
+      
+      /* Mis à jour : Correction de l'alignement vertical strict de l'icône thermomètre */
       .ambient-temp-container ha-icon {
         font-size: 16px !important;
         --mdc-icon-size: 16px !important;
         width: 16px !important;
         height: 16px !important;
+        display: flex;            /* Force le comportement flex */
+        align-items: center;      /* Centre l'icône à l'intérieur */
+        justify-content: center;
         opacity: 0.7;
+      }
+      
+      /* Mis à jour : S'assure que le texte à côté est aussi parfaitement aligné */
+      .ambient-temp-container span {
+        display: flex;
+        align-items: center;
+        line-height: 1;
       }
       
       .icon-wrapper {
