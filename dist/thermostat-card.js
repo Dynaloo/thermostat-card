@@ -103,11 +103,11 @@ class ThermostatCard extends LitElement {
           <div class="buttons2">
             <button class="btn ${mode === 'heat' ? 'active-heat' : ''}" @click="${() => this._setHvacMode('heat')}">
               <ha-icon icon="mdi:fire" class="${mode === 'heat' ? 'blink' : ''}" style="color: ${mode === 'heat' ? 'rgba(255, 0, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-              <span>on</span>
+              <span>ON</span>
             </button>
             <button class="btn ${mode === 'off' ? 'active-off' : ''}" @click="${() => this._setHvacMode('off')}">
               <ha-icon icon="mdi:power" style="color: ${mode === 'off' ? 'rgba(255, 255, 255, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-              <span>off</span>
+              <span>OFF</span>
             </button>
           </div>
 
@@ -175,29 +175,32 @@ class ThermostatCard extends LitElement {
         align-items: center;
         justify-content: space-between;
         background: rgba(255,255,255,0.05);
-        padding: 8px;
-        border-radius: 12px;
+        padding: 10px;
+        border-radius: 14px;
       }
       .shape {
-        width: 48px;
-        height: 48px;
+        width: 52px;
+        height: 52px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: background-color 0.3s;
       }
+      .shape ha-icon {
+        --mdc-icon-size: 26px;
+      }
       .controls {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
       }
       .btn-inc-dec {
         background: rgba(255, 255, 255, 0.08);
         border: none;
         border-radius: 50%;
-        width: 38px;
-        height: 38px;
+        width: 42px;
+        height: 42px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -213,12 +216,12 @@ class ThermostatCard extends LitElement {
         transform: scale(0.92);
       }
       .btn-inc-dec ha-icon {
-        --mdc-icon-size: 20px;
+        --mdc-icon-size: 22px;
       }
       .temp-display {
-        font-size: 18px;
+        font-size: 22px;
         font-weight: bold;
-        min-width: 60px;
+        min-width: 70px;
         text-align: center;
       }
       .buttons2 {
@@ -241,8 +244,8 @@ class ThermostatCard extends LitElement {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 5px;
-        padding: 8px;
+        gap: 6px;
+        padding: 10px 6px;
         border-radius: 8px;
         color: var(--primary-text-color);
         flex: 1;
@@ -250,8 +253,12 @@ class ThermostatCard extends LitElement {
       .btn:hover {
         background: rgba(255, 255, 255, 0.1);
       }
+      .btn ha-icon {
+        --mdc-icon-size: 24px;
+      }
       .btn span {
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: 500;
       }
       @keyframes blink {
         0% { opacity: 1; }
