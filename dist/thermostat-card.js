@@ -70,7 +70,7 @@ class ThermostatCard extends LitElement {
           break;
         case "none":
           mainIcon = "mdi:hand-back-right-outline";
-          mainIconColor = "rgba(255, 0, 255, 1)";
+          mainIconColor = "rgba(255, 255, 0, 1)";
           break;
       }
     }
