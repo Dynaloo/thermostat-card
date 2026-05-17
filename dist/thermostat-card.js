@@ -164,11 +164,12 @@ class ThermostatCard extends LitElement {
 
   static get styles() {
     return css`
+      /* Mis à jour : Réduction de l'espace vertical (gap) entre les lignes de 15px à 5px */
       .card-container {
-        padding: 0 16px 16px 16px;
+        padding: 0 16px 12px 16px;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 5px; 
       }
       .mushroom-container {
         display: flex;
@@ -235,20 +236,19 @@ class ThermostatCard extends LitElement {
       .buttons2 {
         display: flex;
         justify-content: center;
-        gap: 20px; /* Espace fixe entre les deux boutons de la ligne 2 */
+        gap: 20px;
       }
-      
-      /* Mis à jour : Réduction de la largeur des boutons ON/OFF pour les resserrer */
       .buttons2 .btn {
         width: 30% !important; 
-        flex: none !important; /* Désactive l'étirement automatique pour cette ligne */
+        flex: none !important;
       }
-      
       .buttons3 {
         display: flex;
         justify-content: space-between;
         gap: 5px;
       }
+      
+      /* Mis à jour : Réduction du padding (de 8px à 4px) pour tasser verticalement */
       .btn {
         background: transparent;
         border: none;
@@ -257,7 +257,7 @@ class ThermostatCard extends LitElement {
         flex-direction: column;
         align-items: center;
         gap: 5px;
-        padding: 8px;
+        padding: 4px; 
         border-radius: 8px;
         color: var(--primary-text-color);
         flex: 1;
