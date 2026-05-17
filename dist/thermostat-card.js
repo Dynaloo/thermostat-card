@@ -192,13 +192,18 @@ class ThermostatCard extends LitElement {
 
   static get styles() {
     return css`
-      /* Mis à jour : Modification du padding du conteneur (Ajout de 10px en haut) */
       .card-container {
-        padding: 10px 16px 12px 16px; 
+        padding: 0 16px 12px 16px; 
         display: flex;
         flex-direction: column;
         gap: 5px; 
       }
+      
+      /* Nouveau : Force une marge au-dessus de la ligne 1 pour la décoller du haut */
+      .buttons1 {
+        margin-top: 12px !important;
+      }
+      
       .mushroom-container {
         display: flex;
         align-items: center;
