@@ -269,10 +269,12 @@ class ThermostatCard extends LitElement {
         display: flex;
       }
       
-      /* Mis à jour : Augmente la taille et l'épaisseur du texte des lignes 2 et 3 */
+      /* Force l'application de la taille du texte face aux styles globaux de Home Assistant */
       .btn span {
-        font-size: 14px;
-        font-weight: 500;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        display: inline-block;
+        margin-top: 2px;
       }
       
       @keyframes blink {
