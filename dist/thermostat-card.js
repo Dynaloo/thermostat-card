@@ -70,7 +70,7 @@ class ThermostatCard extends LitElement {
           break;
         case "none":
           mainIcon = "mdi:hand-back-right-outline";
-          mainIconColor = "rgba(255, 0, 255, 1)";
+          mainIconColor = "rgba(255, 255, 0, 1)";
           break;
       }
     }
@@ -235,11 +235,15 @@ class ThermostatCard extends LitElement {
       .buttons2 {
         display: flex;
         justify-content: center;
-        gap: 15px;
+        gap: 20px; /* Espace fixe entre les deux boutons de la ligne 2 */
       }
+      
+      /* Mis à jour : Réduction de la largeur des boutons ON/OFF pour les resserrer */
       .buttons2 .btn {
-        width: 45%;
+        width: 30% !important; 
+        flex: none !important; /* Désactive l'étirement automatique pour cette ligne */
       }
+      
       .buttons3 {
         display: flex;
         justify-content: space-between;
@@ -268,15 +272,12 @@ class ThermostatCard extends LitElement {
         height: 30px !important;
         display: flex;
       }
-      
-      /* Force l'application de la taille du texte face aux styles globaux de Home Assistant */
       .btn span {
-        font-size: 15px !important;
+        font-size: 14px !important;
         font-weight: 500 !important;
         display: inline-block;
         margin-top: 2px;
       }
-      
       @keyframes blink {
         0% { opacity: 1; }
         50% { opacity: 0.3; }
