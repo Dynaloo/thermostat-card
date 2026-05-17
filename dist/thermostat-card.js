@@ -70,7 +70,7 @@ class ThermostatCard extends LitElement {
           break;
         case "none":
           mainIcon = "mdi:hand-back-right-outline";
-          mainIconColor = "rgba(255, 255, 0, 1)";
+          mainIconColor = "rgba(255, 0, 255, 1)";
           break;
       }
     }
@@ -102,11 +102,11 @@ class ThermostatCard extends LitElement {
           <!-- Ligne 2 : ON / OFF -->
           <div class="buttons2">
             <button class="btn ${mode === 'heat' ? 'active-heat' : ''}" @click="${() => this._setHvacMode('heat')}">
-              <ha-icon icon="mdi:fire" class="${mode === 'heat' ? 'blink' : ''}"></ha-icon>
+              <ha-icon icon="mdi:fire" class="${mode === 'heat' ? 'blink' : ''}" style="color: ${mode === 'heat' ? 'rgba(255, 0, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
               <span>on</span>
             </button>
             <button class="btn ${mode === 'off' ? 'active-off' : ''}" @click="${() => this._setHvacMode('off')}">
-              <ha-icon icon="mdi:power"></ha-icon>
+              <ha-icon icon="mdi:power" style="color: ${mode === 'off' ? 'rgba(255, 255, 255, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
               <span>off</span>
             </button>
           </div>
@@ -252,12 +252,6 @@ class ThermostatCard extends LitElement {
       }
       .btn span {
         font-size: 12px;
-      }
-      .active-heat ha-icon {
-        color: rgba(255, 0, 0, 1);
-      }
-      .active-off ha-icon {
-        color: rgba(255, 255, 255, 1);
       }
       @keyframes blink {
         0% { opacity: 1; }
