@@ -261,8 +261,6 @@ class ThermostatCard extends LitElement {
       .btn:hover {
         background: rgba(255, 255, 255, 0.1);
       }
-      
-      /* Solution renforcée : On force toutes les méthodes de redimensionnement d'icône pour les lignes 2 et 3 */
       .btn ha-icon {
         font-size: 30px !important;
         --mdc-icon-size: 30px !important;
@@ -271,9 +269,12 @@ class ThermostatCard extends LitElement {
         display: flex;
       }
       
+      /* Mis à jour : Augmente la taille et l'épaisseur du texte des lignes 2 et 3 */
       .btn span {
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: 500;
       }
+      
       @keyframes blink {
         0% { opacity: 1; }
         50% { opacity: 0.3; }
