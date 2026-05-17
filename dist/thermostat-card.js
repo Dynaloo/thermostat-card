@@ -70,7 +70,7 @@ class ThermostatCard extends LitElement {
           break;
         case "none":
           mainIcon = "mdi:hand-back-right-outline";
-          mainIconColor = "rgba(255, 255, 0, 1)";
+          mainIconColor = "rgba(255, 0, 255, 1)";
           break;
       }
     }
@@ -168,36 +168,39 @@ class ThermostatCard extends LitElement {
         padding: 0 16px 16px 16px;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 15px; /* Réduit le gap global de 20px à 15px */
       }
       .mushroom-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         background: rgba(255,255,255,0.05);
-        padding: 8px;
+        padding: 6px; /* Réduit de 8px à 6px */
         border-radius: 12px;
       }
       .shape {
-        width: 48px;
-        height: 48px;
+        width: 38px; /* Réduit de 48px à 38px */
+        height: 38px; /* Réduit de 48px à 38px */
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: background-color 0.3s;
       }
+      .shape ha-icon {
+        --mdc-icon-size: 20px; /* Réduit la taille de l'icône de statut */
+      }
       .controls {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px; /* Réduit de 10px à 8px */
       }
       .btn-inc-dec {
         background: rgba(255, 255, 255, 0.08);
         border: none;
         border-radius: 50%;
-        width: 38px;
-        height: 38px;
+        width: 32px; /* Réduit de 38px à 32px */
+        height: 32px; /* Réduit de 38px à 32px */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -213,12 +216,12 @@ class ThermostatCard extends LitElement {
         transform: scale(0.92);
       }
       .btn-inc-dec ha-icon {
-        --mdc-icon-size: 20px;
+        --mdc-icon-size: 16px; /* Réduit les icônes +/- de 20px à 16px */
       }
       .temp-display {
-        font-size: 18px;
+        font-size: 16px; /* Réduit le texte de 18px à 16px */
         font-weight: bold;
-        min-width: 60px;
+        min-width: 50px; /* Réduit de 60px à 50px */
         text-align: center;
       }
       .buttons2 {
