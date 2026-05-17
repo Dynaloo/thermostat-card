@@ -188,6 +188,8 @@ class ThermostatCard extends LitElement {
         transition: background-color 0.3s;
       }
       .shape ha-icon {
+        width: 26px !important;
+        height: 26px !important;
         --mdc-icon-size: 26px;
       }
       .controls {
@@ -216,6 +218,8 @@ class ThermostatCard extends LitElement {
         transform: scale(0.92);
       }
       .btn-inc-dec ha-icon {
+        width: 22px !important;
+        height: 22px !important;
         --mdc-icon-size: 22px;
       }
       .temp-display {
@@ -254,6 +258,8 @@ class ThermostatCard extends LitElement {
         background: rgba(255, 255, 255, 0.1);
       }
       .btn ha-icon {
+        width: 24px !important;
+        height: 24px !important;
         --mdc-icon-size: 24px;
       }
       .btn span {
