@@ -14,23 +14,23 @@ Une carte minimaliste et performante écrite en JavaScript pur (`LitElement`) po
 Ajoutez simplement ce bloc dans votre tableau de bord en mode YAML :
 
 ```yaml
-type: custom:thermostat-chambre-card
-title: Thermostat Chambre 1
+type: custom:thermostat-card
+title: Thermostat Salon/Cuisine
 entity: climate.thermostat_salon_cuisine
 ```
 
 
 | Option | Type | Requis | Par défaut | Description |
 | :--- | :--- | :---: | :---: | :--- |
-| `type` | string | **Oui** | - | Doit être obligatoirement `custom:thermostat-chambre-card`. |
-| `entity` | string | **Oui** | - | L'identifiant de votre entité de chauffage (ex: `climate.thermostat_salon`). |
-| `title` | string | Non | - | Le titre personnalisé affiché en haut de la carte (ex: `Chambre 1`). |
+| `type` | string | **Oui** | - | Doit être obligatoirement `custom:thermostat-card`. |
+| `entity` | string | **Oui** | - | L'identifiant de votre entité de chauffage (ex: `climate.thermostat_salon_cuisine`). |
+| `title` | string | Non | - | Le titre personnalisé affiché en haut de la carte (ex: `Thermostat Salon/Cuisine`). |
 
 
 <div style="text-align: center;">
   <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu de la carte Thermostat version chauffage</p>
-  <img src="images/Capture%201.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
+  <img src="images/Capture-1.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
   
   <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu de la carte Thermostat version climatisation</p>
-  <img src="images/Capture%202.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
+  <img src="images/Capture-2.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
 </div>
