@@ -34,4 +34,3 @@ entity: climate.thermostat_salon_cuisine
   <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu de la carte Thermostat version climatisation</p>
   <img src="images/Capture%202.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
 </div>
-

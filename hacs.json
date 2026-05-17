@@ -1,0 +1,7 @@
+{
+  "name": "Thermostat card",
+  "render_readme": true,
+  "filename": "thermostat-card.js",
+  "homeassistant": "2025.1.0",
+  "hacs": "2.0.0"
+}
