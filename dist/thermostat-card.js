@@ -86,11 +86,17 @@ class ThermostatCard extends LitElement {
                 <ha-icon .icon="${mainIcon}" style="color: ${mainIconColor};"></ha-icon>
               </div>
               <div class="controls">
-                <ha-icon-button icon="mdi:minus" @click="${() => this._setTemp(stateObj, -0.5)}"></ha-icon-button>
+                <ha-icon-button @click="${() => this._setTemp(stateObj, -0.5)}">
+                  <ha-icon icon="mdi:minus"></ha-icon>
+                </ha-icon-button>
+                
                 <span class="temp-display">
                   ${stateObj.attributes.temperature ? stateObj.attributes.temperature : '--'}°C
                 </span>
-                <ha-icon-button icon="mdi:plus" @click="${() => this._setTemp(stateObj, 0.5)}"></ha-icon-button>
+                
+                <ha-icon-button @click="${() => this._setTemp(stateObj, 0.5)}">
+                  <ha-icon icon="mdi:plus"></ha-icon>
+                </ha-icon-button>
               </div>
             </div>
           </div>
