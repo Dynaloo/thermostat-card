@@ -31,4 +31,5 @@ current_temp_sensor: sensor.temperature_salon_cuisine
 
 <div style="text-align: center;">
   <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu de la carte Thermostat chauffage</p>
-  <img src="images/Capture-1.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/dynaloo/thermostat-card/main/images/Capture-1.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
+</div>
