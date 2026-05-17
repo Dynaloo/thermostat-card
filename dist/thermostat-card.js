@@ -24,7 +24,7 @@ class ThermostatCard extends LitElement {
       return html``;
     }
 
-    // Récupération dynamique de l'entité depuis le YAML
+    // Récupération dynamique des entités depuis le YAML
     const entityId = this.config.entity;
     const stateObj = this.hass.states[entityId];
 
@@ -43,6 +43,12 @@ class ThermostatCard extends LitElement {
     
     // Détection si le thermostat est activement en train de chauffer
     const isHeating = stateObj.attributes.hvac_action === "heating";
+
+    // Récupération de la température réelle via le sensor additionnel du YAML
+    let currentRoomTemp = null;
+    if (this.config.current_temp_sensor && this.hass.states[this.config.current_temp_sensor]) {
+      currentRoomTemp = this.hass.states[this.config.current_temp_sensor].state;
+    }
 
     // Détermination de l'icône principale et de sa couleur
     let mainIcon = "mdi:thermostat";
@@ -73,7 +79,7 @@ class ThermostatCard extends LitElement {
           break;
         case "none":
           mainIcon = "mdi:hand-back-right-outline";
-          mainIconColor = "rgba(255, 0, 255, 1)";
+          mainIconColor = "rgba(255, 255, 0, 1)";
           break;
       }
     }
@@ -85,15 +91,27 @@ class ThermostatCard extends LitElement {
           <!-- Ligne 1 : Contrôle principal (Mushroom-like) -->
           <div class="buttons1">
             <div class="mushroom-container">
-              <!-- Conteneur de l'icône avec position relative pour le badge -->
+              
+              <!-- Partie gauche : Icône principale -->
               <div class="icon-wrapper">
                 <div class="shape" style="background-color: ${shapeColor};">
                   <ha-icon .icon="${mainIcon}" style="color: ${mainIconColor};"></ha-icon>
                 </div>
-                <!-- Affichage conditionnel du badge de chauffe -->
                 ${isHeating ? html`<div class="heating-badge"></div>` : html``}
               </div>
               
+              <!-- Partie centrale : Affichage de la température réelle alignée horizontalement -->
+              ${currentRoomTemp 
+                ? html`
+                    <div class="ambient-temp-container">
+                      <ha-icon icon="mdi:thermometer"></ha-icon>
+                      <span>${currentRoomTemp}°C</span>
+                    </div>
+                  ` 
+                : html`<div style="flex: 1;"></div>`
+              }
+              
+              <!-- Partie droite : Boutons de consigne et affichage -->
               <div class="controls">
                 <button class="btn-inc-dec" @click="${() => this._setTemp(stateObj, -0.5)}">
                   <ha-icon icon="mdi:minus"></ha-icon>
@@ -105,6 +123,7 @@ class ThermostatCard extends LitElement {
                   <ha-icon icon="mdi:plus"></ha-icon>
                 </button>
               </div>
+              
             </div>
           </div>
 
@@ -188,25 +207,40 @@ class ThermostatCard extends LitElement {
         border-radius: 12px;
       }
       
-      /* Nouveau : Encapsulation de l'icône et du badge */
+      /* Mis à jour : Conteneur central pour aligner horizontalement la température réelle */
+      .ambient-temp-container {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: var(--secondary-text-color);
+        font-size: 13px;
+        font-weight: 500;
+        flex: 1;
+        justify-content: center; /* Centre la valeur dans l'espace disponible */
+      }
+      .ambient-temp-container ha-icon {
+        font-size: 16px !important;
+        --mdc-icon-size: 16px !important;
+        width: 16px !important;
+        height: 16px !important;
+        opacity: 0.7;
+      }
+      
       .icon-wrapper {
         position: relative;
         display: inline-flex;
       }
-      
-      /* Nouveau : Style du badge de chauffage (point orange/rouge clignotant) */
       .heating-badge {
         position: absolute;
         top: -2px;
         right: -2px;
         width: 12px;
         height: 12px;
-        background-color: #ff5722; /* Couleur orange/rouge de chauffe */
+        background-color: #ff5722;
         border-radius: 50%;
-        border: 2px solid var(--card-background-color, #1c1c1e); /* Découpe propre sur le fond */
+        border: 2px solid var(--card-background-color, #1c1c1e);
         animation: pulse 2s infinite;
       }
-      
       .shape {
         width: 38px;
         height: 38px;
@@ -304,8 +338,6 @@ class ThermostatCard extends LitElement {
         display: inline-block;
         margin-top: 2px;
       }
-      
-      /* Animations */
       @keyframes blink {
         0% { opacity: 1; }
         50% { opacity: 0.3; }
@@ -314,8 +346,6 @@ class ThermostatCard extends LitElement {
       .blink {
         animation: blink 3s infinite;
       }
-      
-      /* Nouveau : Animation de pulsation pour le badge */
       @keyframes pulse {
         0% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7); }
         70% { box-shadow: 0 0 0 6px rgba(255, 87, 34, 0); }
