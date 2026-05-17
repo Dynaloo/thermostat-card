@@ -14,17 +14,17 @@ Une carte minimaliste et performante écrite en JavaScript pur (`LitElement`) po
 Ajoutez simplement ce bloc dans votre tableau de bord en mode YAML :
 
 ```yaml
-type: custom:thermostat-chambre-card
-title: Thermostat Chambre 1
+type: custom:thermostat-card
+title: Thermostat Salon/Cuisine
 entity: climate.thermostat_salon_cuisine
 ```
 
 
 | Option | Type | Requis | Par défaut | Description |
 | :--- | :--- | :---: | :---: | :--- |
-| `type` | string | **Oui** | - | Doit être obligatoirement `custom:thermostat-chambre-card`. |
-| `entity` | string | **Oui** | - | L'identifiant de votre entité de chauffage (ex: `climate.thermostat_salon`). |
-| `title` | string | Non | - | Le titre personnalisé affiché en haut de la carte (ex: `Chambre 1`). |
+| `type` | string | **Oui** | - | Doit être obligatoirement `custom:thermostat-card`. |
+| `entity` | string | **Oui** | - | L'identifiant de votre entité de chauffage (ex: `climate.thermostat_salon_cuisine`). |
+| `title` | string | Non | - | Le titre personnalisé affiché en haut de la carte (ex: `Thermostat Salon/Cuisine`). |
 
 
 <div style="text-align: center;">
