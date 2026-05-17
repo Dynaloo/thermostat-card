@@ -24,6 +24,7 @@ class ThermostatCard extends LitElement {
       return html``;
     }
 
+    // Récupération dynamique de l'entité depuis le YAML
     const entityId = this.config.entity;
     const stateObj = this.hass.states[entityId];
 
@@ -40,35 +41,35 @@ class ThermostatCard extends LitElement {
     const mode = stateObj.state;
     const preset = stateObj.attributes.preset_mode;
 
-    // Détermination de l'icône principale (Tracés SVG natifs MDI)
-    let mainIconPath = "M12,2A3,3 0 0,0 9,5V12A6,6 0 0,0 7,17A5,5 0 0,0 12,22A5,5 0 0,0 17,17A6,6 0 0,0 15,12V5A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5V7H11V5A1,1 0 0,1 12,4M13,10V12H11V10H13M12,20A3,3 0 0,1 9,17C9,15.76 9.77,14.69 11,14.25V13H13V14.25C14.23,14.69 15,15.76 15,17A3,3 0 0,1 12,20Z"; 
+    // Détermination de l'icône principale et de sa couleur
+    let mainIcon = "mdi:thermostat";
     let mainIconColor = "rgba(255, 255, 0, 1)";
     let shapeColor = "rgba(0, 0, 0, 1)";
 
     if (mode === "off") {
-      mainIconPath = "M12,21A9,9 0 0,1 3,12A9,9 0 0,1 12,3A9,9 0 0,1 21,12A9,9 0 0,1 12,21M12,1A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,1M11,6V13H13V6H11Z";
+      mainIcon = "mdi:power";
       mainIconColor = "rgba(255, 255, 255, 1)";
       shapeColor = "rgba(128, 128, 128, 1)";
     } else if (mode === "heat") {
       switch (preset) {
         case "comfort":
-          mainIconPath = "M19,10H5V13H19V10M19,15H5V18H19V15M12,2A5,5 0 0,0 7,7V8H17V7A5,5 0 0,0 12,2Z"; // Simplifié/Sofa alternatif pour compatibilité
+          mainIcon = "mdi:sofa";
           mainIconColor = "rgba(255, 165, 0, 1)";
           break;
         case "eco":
-          mainIconPath = "M17,8C8,10 5.9,16.17 5.18,18C6.9,17.16 11,15.35 14,13.05C11.5,13.18 8.86,13.96 7,15C7.86,13.1 11,10.6 16,9.5C15.04,11.31 13,14 9,15.5C13,14.5 16,11 18,6C17.65,6.65 17.3,7.34 17,8Z";
+          mainIcon = "mdi:leaf";
           mainIconColor = "rgba(0, 128, 0, 1)";
           break;
         case "frost":
-          mainIconPath = "M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM11 7H13V13H11ZM11 15H13V17H11Z"; // Variante simple lisible
+          mainIcon = "mdi:snowflake-thermometer";
           mainIconColor = "rgba(0, 191, 255, 1)";
           break;
         case "boost":
-          mainIconPath = "M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,6H13V10H17V12H13V16H11V12H7V10H11V6Z";
+          mainIcon = "mdi:rocket-launch";
           mainIconColor = "rgba(255, 0, 0, 1)";
           break;
         case "none":
-          mainIconPath = "M12,2A10,10 0 1,0 22,12A10,10 0 0,0 12,2ZM12,17.5A1.5,1.5 0 1,1 13.5,16A1.5,1.5 0 0,1 12,17.5ZM13.5,13H10.5V6.5H13.5Z";
+          mainIcon = "mdi:hand-back-right-outline";
           mainIconColor = "rgba(255, 0, 255, 1)";
           break;
       }
@@ -78,27 +79,21 @@ class ThermostatCard extends LitElement {
       <ha-card .header="${this.config.title || ''}">
         <div class="card-container">
           
-          <!-- Ligne 1 : Contrôle principal avec SVG NATIFS -->
+          <!-- Ligne 1 : Contrôle principal (Mushroom-like) -->
           <div class="buttons1">
             <div class="mushroom-container">
               <div class="shape" style="background-color: ${shapeColor};">
-                <svg class="svg-main" viewBox="0 0 24 24" style="fill: ${mainIconColor};">
-                  <path d="${mainIconPath}"/>
-                </svg>
+                <ha-icon .icon="${mainIcon}" style="color: ${mainIconColor};"></ha-icon>
               </div>
               <div class="controls">
                 <button class="btn-inc-dec" @click="${() => this._setTemp(stateObj, -0.5)}">
-                  <svg class="svg-btn" viewBox="0 0 24 24">
-                    <path d="M19,13H5V11H19V13Z" />
-                  </svg>
+                  <ha-icon icon="mdi:minus"></ha-icon>
                 </button>
                 <span class="temp-display">
                   ${stateObj.attributes.temperature ? stateObj.attributes.temperature : '--'}°C
                 </span>
                 <button class="btn-inc-dec" @click="${() => this._setTemp(stateObj, 0.5)}">
-                  <svg class="svg-btn" viewBox="0 0 24 24">
-                    <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-                  </svg>
+                  <ha-icon icon="mdi:plus"></ha-icon>
                 </button>
               </div>
             </div>
@@ -108,11 +103,11 @@ class ThermostatCard extends LitElement {
           <div class="buttons2">
             <button class="btn ${mode === 'heat' ? 'active-heat' : ''}" @click="${() => this._setHvacMode('heat')}">
               <ha-icon icon="mdi:fire" class="${mode === 'heat' ? 'blink' : ''}" style="color: ${mode === 'heat' ? 'rgba(255, 0, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-              <span>ON</span>
+              <span>on</span>
             </button>
             <button class="btn ${mode === 'off' ? 'active-off' : ''}" @click="${() => this._setHvacMode('off')}">
               <ha-icon icon="mdi:power" style="color: ${mode === 'off' ? 'rgba(255, 255, 255, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-              <span>OFF</span>
+              <span>off</span>
             </button>
           </div>
 
@@ -180,34 +175,29 @@ class ThermostatCard extends LitElement {
         align-items: center;
         justify-content: space-between;
         background: rgba(255,255,255,0.05);
-        padding: 10px;
-        border-radius: 14px;
+        padding: 8px;
+        border-radius: 12px;
       }
       .shape {
-        width: 52px;
-        height: 52px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: background-color 0.3s;
       }
-      /* TAILLE ICÔNE PRINCIPALE DE GAUCHE : Réglage direct en pixels */
-      .svg-main {
-        width: 24px;
-        height: 24px;
-      }
       .controls {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
       }
       .btn-inc-dec {
         background: rgba(255, 255, 255, 0.08);
         border: none;
         border-radius: 50%;
-        width: 42px;
-        height: 42px;
+        width: 38px;
+        height: 38px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -222,16 +212,13 @@ class ThermostatCard extends LitElement {
       .btn-inc-dec:active {
         transform: scale(0.92);
       }
-      /* TAILLE DES BOUTONS PLUS / MOINS : Réglage direct en pixels */
-      .svg-btn {
-        width: 18px;
-        height: 18px;
-        fill: var(--primary-text-color);
+      .btn-inc-dec ha-icon {
+        --mdc-icon-size: 20px;
       }
       .temp-display {
-        font-size: 22px;
+        font-size: 18px;
         font-weight: bold;
-        min-width: 70px;
+        min-width: 60px;
         text-align: center;
       }
       .buttons2 {
@@ -254,8 +241,8 @@ class ThermostatCard extends LitElement {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
-        padding: 10px 6px;
+        gap: 5px;
+        padding: 8px;
         border-radius: 8px;
         color: var(--primary-text-color);
         flex: 1;
@@ -263,13 +250,12 @@ class ThermostatCard extends LitElement {
       .btn:hover {
         background: rgba(255, 255, 255, 0.1);
       }
+      /* NUANCE APPORTÉE : Cible uniquement la taille des icônes des boutons des lignes 2 & 3 */
       .btn ha-icon {
-        transform: scale(1.25);
-        margin-bottom: 4px;
+        --mdc-icon-size: 24px;
       }
       .btn span {
-        font-size: 14px;
-        font-weight: 500;
+        font-size: 12px;
       }
       @keyframes blink {
         0% { opacity: 1; }
