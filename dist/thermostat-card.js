@@ -89,11 +89,9 @@ class ThermostatCard extends LitElement {
                 <button class="btn-inc-dec" @click="${() => this._setTemp(stateObj, -0.5)}">
                   <ha-icon icon="mdi:minus"></ha-icon>
                 </button>
-                
                 <span class="temp-display">
                   ${stateObj.attributes.temperature ? stateObj.attributes.temperature : '--'}°C
                 </span>
-                
                 <button class="btn-inc-dec" @click="${() => this._setTemp(stateObj, 0.5)}">
                   <ha-icon icon="mdi:plus"></ha-icon>
                 </button>
@@ -194,9 +192,34 @@ class ThermostatCard extends LitElement {
         align-items: center;
         gap: 10px;
       }
+      .btn-inc-dec {
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--primary-text-color);
+        transition: background 0.2s, transform 0.1s;
+        padding: 0;
+      }
+      .btn-inc-dec:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .btn-inc-dec:active {
+        transform: scale(0.92);
+      }
+      .btn-inc-dec ha-icon {
+        --mdc-icon-size: 20px;
+      }
       .temp-display {
         font-size: 18px;
         font-weight: bold;
+        min-width: 60px;
+        text-align: center;
       }
       .buttons2 {
         display: flex;
