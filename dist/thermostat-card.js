@@ -70,7 +70,7 @@ class ThermostatCard extends LitElement {
           break;
         case "none":
           mainIcon = "mdi:hand-back-right-outline";
-          mainIconColor = "rgba(255, 0, 255, 1)";
+          mainIconColor = "rgba(255, 255, 0, 1)";
           break;
       }
     }
@@ -249,10 +249,6 @@ class ThermostatCard extends LitElement {
       }
       .btn:hover {
         background: rgba(255, 255, 255, 0.1);
-      }
-      /* NUANCE APPORTÉE : Cible uniquement la taille des icônes des boutons des lignes 2 & 3 */
-      .btn ha-icon {
-        --mdc-icon-size: 24px;
       }
       .btn span {
         font-size: 12px;
