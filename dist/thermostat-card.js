@@ -187,8 +187,9 @@ class ThermostatCard extends LitElement {
         justify-content: center;
         transition: background-color 0.3s;
       }
+      /* MODIFIÉ : Taille de l'icône de gauche réduite (échelle à 1) */
       .shape ha-icon {
-        transform: scale(1.15);
+        transform: scale(1);
       }
       .controls {
         display: flex;
@@ -215,8 +216,9 @@ class ThermostatCard extends LitElement {
       .btn-inc-dec:active {
         transform: scale(0.92);
       }
+      /* MODIFIÉ : Taille des icônes plus et moins réduite à 0.9 */
       .btn-inc-dec ha-icon {
-        transform: scale(1.1);
+        transform: scale(0.9);
       }
       .temp-display {
         font-size: 22px;
@@ -253,7 +255,6 @@ class ThermostatCard extends LitElement {
       .btn:hover {
         background: rgba(255, 255, 255, 0.1);
       }
-      /* CORRECTION : L'utilisation de scale() force l'agrandissement de l'icône imbriquée */
       .btn ha-icon {
         transform: scale(1.25);
         margin-bottom: 4px;
