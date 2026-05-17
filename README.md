@@ -29,9 +29,9 @@ entity: climate.thermostat_salon_cuisine
 
 <div style="text-align: center;">
   <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu de la carte Thermostat version chauffage</p>
-  <img src="images/Capture%201.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
+  <img src="images/Capture-1.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
   
   <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu de la carte Thermostat version climatisation</p>
-  <img src="images/Capture%202.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
+  <img src="images/Capture-2.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
 </div>
 
