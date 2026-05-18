@@ -8,7 +8,7 @@ Une carte minimaliste et performante écrite en JavaScript pur (`LitElement`) po
 * **Contrôle rapide :** Ajustement de la température (+/- 0,5°C), gestion du mode On/Off et sélection immédiate des presets (Confort, Éco, Hors gel, Boost, Manuel).
 * **Badge rouge clignotant :** indique que le chauffage est actif (en cours de chauffe)
 * **Affichage température ambiante :** s'affiche uniquement si une entitée de température est déclarée
-* **Adaptatif :** génère les icones spécifiques pour les climatiseurs (testé avec Mitsubishi)
+* **Adaptatif :** génère les presets spécifiques et les options climatiseurs (testé avec Mitsubishi via l'app Melcloud )
 
 ---
 
