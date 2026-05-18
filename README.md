@@ -5,9 +5,10 @@ Une carte minimaliste et performante écrite en JavaScript pur (`LitElement`) po
 ## ✨ Fonctionnalités
 * **Zéro dépendance :** Pas besoin d'installer *Mushroom*, *Stack-in-card*, *Button-card* ou *Card-mod*. Tout est inclus nativement.
 * **Dynamique :** L'icône centrale change de forme, de couleur et s'anime (clignotement en mode chauffe) selon l'état actuel du thermostat.
-* **Contrôle rapide :** Ajustement de la température (+/- 0.5°C), gestion du mode On/Off et sélection immédiate des presets (Confort, Éco, Hors gel, Boost, Manuel).
+* **Contrôle rapide :** Ajustement de la température (+/- 0,5°C), gestion du mode On/Off et sélection immédiate des presets (Confort, Éco, Hors gel, Boost, Manuel).
 * **Badge rouge clignotant :** indique que le chauffage est actif (en cours de chauffe)
 * **Affichage température ambiante :** s'affiche uniquement si une entitée de température est déclarée
+* **Adaptatif :** génère les icones spécifiques pour les climatiseurs (testé avec Mitsubishi)
 
 ---
 
@@ -21,18 +22,20 @@ Une carte minimaliste et performante écrite en JavaScript pur (`LitElement`) po
 
 ## 🛠️ Quick Setup
 
-Simply add this block to your dashboard in YAML mode :
+Choose the personalized thermostat card, and fill in the fields or simply add this block to your dashboard in YAML mode :
 
 ```yaml
 type: custom:thermostat-card
-title: Thermostat Salon/Cuisine
+device_type: heater
 entity: climate.thermostat_salon_cuisine
+title: Thermostat Salon/Cuisine
 current_temp_sensor: sensor.temperature_salon_cuisine
 ```
 
 
 | Option | Type | Requis | Par défaut | Description |
 | :--- | :--- | :---: | :---: | :--- |
+| `device_type` | string | **yes** | - | Doit être obligatoirement `heater or ac`. |
 | `type` | string | **yes** | - | Doit être obligatoirement `custom:thermostat-card`. |
 | `entity` | string | **yes** | - | L'identifiant de votre entité de chauffage (ex: `climate.thermostat_salon_cuisine`). |
 | `title` | string | No | - | Le titre personnalisé affiché en haut de la carte (ex: `Thermostat Salon/Cuisine`). |
