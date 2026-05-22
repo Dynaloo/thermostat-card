@@ -81,5 +81,5 @@ current_temp_sensor: sensor.temperature_salon_cuisine
 </div>
 
 ---
-🤝 Contribuer
-Contribute! Suggestions and bug reports are welcome! Feel free to open an issue or submit a pull request to the repository.
+
+🤝 Contribute! Suggestions and bug reports are welcome! Feel free to open an issue or submit a pull request to the repository.
