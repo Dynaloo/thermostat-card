@@ -95,6 +95,15 @@ current_temp_sensor: sensor.temperature_salon_cuisine
   <img src="https://raw.githubusercontent.com/dynaloo/thermostat-card/main/images/Capture-3.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
 </div>
 
+<div style="text-align: center;">
+  <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu carte Thermostat climatiseur en mode <b>off</b></p>
+  <img src="https://raw.githubusercontent.com/dynaloo/thermostat-card/main/images/Capture-4.png" alt="Aperçu du Thermostat>" width="400" style="display: block; margin: 0 auto;">
+</div>
+
+<div style="text-align: center;">
+  <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu carte Thermostat climatiseur en mode <b>ventilation</b></p>
+  <img src="https://raw.githubusercontent.com/dynaloo/thermostat-card/main/images/Capture-5.png" alt="Aperçu du Thermostat>" width="400" style="display: block; margin: 0 auto;">
+</div>
 ---
 
 🤝 Contribute! Suggestions and bug reports are welcome! Feel free to open an issue or submit a pull request to the repository.
