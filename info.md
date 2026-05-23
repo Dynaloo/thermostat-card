@@ -2,6 +2,8 @@
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
 ![Version](https://img.shields.io/badge/version-1.0.8-blue.svg)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/dynaloo/thermostat-card/total?label=Downloads)
+[![Home Assistant Community Forum](https://img.shields.io/badge/Home%20Assistant-Community%20Forum-blue?logo=home-assistant)](https://community.home-assistant.io/t/simple-swipe-card-a-custom-card-for-easy-card-navigation/888415)
 
 Une carte Home Assistant (Lovelace) universelle, moderne et ultra-réactive pour piloter vos appareils de **Chauffage classique fils pilotes** ou de **Climatisation (AC)** (testé avec Mitsubishi). Inspirée du design épuré de *Mushroom*, elle regroupe l'essentiel de vos commandes sur un minimum d'espace.
 
@@ -25,18 +27,26 @@ Une carte Home Assistant (Lovelace) universelle, moderne et ultra-réactive pour
 
 ## 🚀 Installation
 
-### Via HACS (Recommandé)
-1. In Home Assistant, go to HACS → Integrations → Custom Repositories.
-2. Add this repository URL: `https://github.com/dynaloo/thermostat-card` (type: Dashboard).
-3. Search for "thermostat-card" in HACS and click Install.
-4. Click on reload.
+### HACS (Manual)
+1. Open HACS
+2. Click on the three dots in the top right corner
+3. Select "Custom repositories"
+4. Add this repository URL : `https://github.com/dynaloo/thermostat-card`
+5. Click "Add"
+6. Click on reload
+7. Search for "thermostat-card" and install it
 
-### Installation Manuelle
-1. Download the `thermostat-card.js` file to the root of this repository.
-2. Copy the file to your Home Assistant folder: `config/www/thermostat-card.js`.
-3. Add the resource reference to your dashboard (Settings -> Dashboards -> 3 dots in the upper right corner -> Resources):
-   * **URL :** `/local/thermostat-card.js`
-   * **Type :** `JavaScript Module`
+### Manual Installation
+1. Download `thermostat-card` from the latest release or from the `/build` folder in the main repository
+2. Copy it to `config/www/thermostat-card/thermostat-card.js`
+3. Add the following to your configuration.yaml:
+   ```yaml
+   lovelace:
+     resources:
+       - url: /local/thermostat-card/thermostat-card.js
+         type: module
+   ```
+4. Restart Home Assistant
 
 ---
 
