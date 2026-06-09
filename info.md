@@ -1,8 +1,8 @@
 # Thermostat Personnalisé Adaptatif (Heater & AC)
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
-![Version](https://img.shields.io/github/v/release/dynaloo/thermostat-card?label=version&color=blue)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/dynaloo/thermostat-card/total?label=Downloads)
+![Version](https://badgen.net/github/release/dynaloo/thermostat-card?label=version&color=blue)
+![Downloads](https://badgen.net/github/assets-dl/dynaloo/thermostat-card?label=Downloads&color=blue)
 [![Home Assistant Community Forum](https://img.shields.io/badge/Home%20Assistant-Community%20Forum-blue?logo=home-assistant)](https://community.home-assistant.io/t/simple-swipe-card-a-custom-card-for-easy-card-navigation/888415)
 
 Une carte Home Assistant (Lovelace) universelle, moderne et ultra-réactive pour piloter vos appareils de **Chauffage classique fils pilotes** ou de **Climatisation (AC)** (testé avec Mitsubishi). Inspirée du design épuré de *Mushroom*, elle regroupe l'essentiel de vos commandes sur un minimum d'espace.
