@@ -1,0 +1,21 @@
+name: Upload Release Asset
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload JS Bundle to Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/thermostat-card.js
+          asset_name: thermostat-card.js
+          tag: ${{ github.ref }}
+          overwrite: true
