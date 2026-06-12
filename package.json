@@ -1,3 +1,0 @@
-"scripts": {
-  "build": "mkdir -p dist && cp src/thermostat-card.js dist/thermostat-card.js"
-}
