@@ -11,6 +11,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # ÉTAPE AJOUTÉE : Copie automatique du fichier src vers dist
+      - name: Copy thermostat-card.js from src to dist
+        run: |
+          mkdir -p dist
+          cp src/thermostat-card.js dist/thermostat-card.js
+
       - name: Upload JS Bundle to Release
         uses: svenstaro/upload-release-action@v2
         with:
