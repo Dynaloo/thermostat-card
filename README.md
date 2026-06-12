@@ -1,7 +1,7 @@
 # 🌡️ Thermostat Personnalisé Adaptatif (Heater & AC)
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
-![Version](https://badgen.net/github/release/dynaloo/thermostat-card?label=version&color=blue)
+![Version](https://badgen.net/github/release/dynaloo/thermostat-card/stable?label=version&color=blue)
 ![Downloads](https://badgen.net/github/assets-dl/dynaloo/thermostat-card?label=Downloads&color=blue)
 [![Home Assistant Community Forum](https://img.shields.io/badge/Home%20Assistant-Community%20Forum-blue?logo=home-assistant)](https://community.home-assistant.io/t/simple-swipe-card-a-custom-card-for-easy-card-navigation/888415)
 
