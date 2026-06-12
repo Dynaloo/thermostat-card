@@ -1,0 +1,16 @@
+# Dépendances
+node_modules/
+npm-debug.log*
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Configuration locale de l'éditeur
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
