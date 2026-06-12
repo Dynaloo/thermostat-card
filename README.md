@@ -1,9 +1,6 @@
 # 🌡️ Thermostat Personnalisé Adaptatif (Heater & AC)
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
-![Version](https://badgen.net/github/release/dynaloo/thermostat-card/stable?label=version&color=blue)
-![Downloads](https://badgen.net/github/assets-dl/dynaloo/thermostat-card?label=Downloads&color=blue)
-[![Home Assistant Community Forum](https://img.shields.io/badge/Home%20Assistant-Community%20Forum-blue?logo=home-assistant)](https://community.home-assistant.io/t/simple-swipe-card-a-custom-card-for-easy-card-navigation/888415)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration) ![Version](https://badgen.net/github/release/dynaloo/thermostat-card/stable?label=version&color=blue) <!-- ![Version](https://badgen.net/github/tag/dynaloo/thermostat-card?label=version&color=blue) --> ![Downloads](https://badgen.net/github/assets-dl/dynaloo/thermostat-card?label=Downloads&color=blue) [![Home Assistant Community Forum](https://img.shields.io/badge/Home%20Assistant-Community%20Forum-blue?logo=home-assistant)](https://community.home-assistant.io/t/simple-swipe-card-a-custom-card-for-easy-card-navigation/888415)
 
 Une carte Home Assistant (Lovelace) universelle, moderne et ultra-réactive pour piloter vos appareils de **Chauffage classique fils pilotes** ou de **Climatisation (AC)** (testé avec Mitsubishi). Inspirée du design épuré de *Mushroom*, elle regroupe l'essentiel de vos commandes sur un minimum d'espace.
 
@@ -17,6 +14,8 @@ Une carte Home Assistant (Lovelace) universelle, moderne et ultra-réactive pour
   * Gestion intégrée de la vitesse de ventilation (`fan_mode`) et de l'oscillation des volets horizontaux/verticaux (`swing_mode`).
 * 🎨 **Indicateurs d'États Clairs :** 
   * Fond d'icône noir lorsque l'appareil est actif, gris uni lorsqu'il est éteint (`off`).
+  * Les presets (chauffage) sont masqués lorsque le thermostat est éteint (`off`).
+  * Les +/- du réglage de température sont inactif lorsque le thermostat est éteint (`off`).
   * Badge pulsant de couleur (Orange pour le chauffage, Bleu pour la clim) en fonction de l'activité réelle (`hvac_action`).
 * 🐭 **Infobulles Contextuelles :**
   * Survoler les boutons à la souris affiche des informations détaillées sur l'action ou l'état actuel de la sonde.
