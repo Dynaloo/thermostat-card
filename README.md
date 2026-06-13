@@ -1,26 +1,26 @@
-# 🌡️ Thermostat Personnalisé Adaptatif (Heater & AC)
+# 🌡️ Adaptive Custom Thermostat (Heater & AC)
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration) ![Version](https://badgen.net/github/release/dynaloo/thermostat-card/stable?label=version&color=blue) <!-- ![Version](https://badgen.net/github/tag/dynaloo/thermostat-card?label=version&color=blue) --> ![Downloads](https://badgen.net/github/assets-dl/dynaloo/thermostat-card?label=Downloads&color=blue) [![Home Assistant Community Forum](https://img.shields.io/badge/Home%20Assistant-Community%20Forum-blue?logo=home-assistant)](https://community.home-assistant.io/t/simple-swipe-card-a-custom-card-for-easy-card-navigation/888415)
 
-Une carte Home Assistant (Lovelace) universelle, moderne et ultra-réactive pour piloter vos appareils de **Chauffage classique fils pilotes** ou de **Climatisation (AC)** (testé avec Mitsubishi). Inspirée du design épuré de *Mushroom*, elle regroupe l'essentiel de vos commandes sur un minimum d'espace.
+A universal, modern, and ultra-responsive Home Assistant (Lovelace) card to control your **conventional heating (pilot wire)** or **air conditioning (AC)** devices (tested with Mitsubishi Melcloud integration). Inspired by the sleek design of *Mushroom*, it consolidates all your essential controls in a minimal footprint.
 
 ---
 
-## ✨ Fonctionnalités
+## ✨ Features
 
-* 🔄 **Double Interface :**
-  * S'adapte automatiquement selon le type d'appareil choisi (Chauffage avec presets ou Climatisation avec modes complexes).
-* 🎛️ **Contrôles AC Avancés :**
-  * Gestion intégrée de la vitesse de ventilation (`fan_mode`) et de l'oscillation des volets horizontaux/verticaux (`swing_mode`).
-* 🎨 **Indicateurs d'États Clairs :** 
-  * Fond d'icône noir lorsque l'appareil est actif, gris uni lorsqu'il est éteint (`off`).
-  * Les presets (chauffage) sont masqués lorsque le thermostat est éteint (`off`).
-  * Les +/- du réglage de température sont inactif lorsque le thermostat est éteint (`off`).
-  * Badge pulsant de couleur (Orange pour le chauffage, Bleu pour la clim) en fonction de l'activité réelle (`hvac_action`).
-* 🐭 **Infobulles Contextuelles :**
-  * Survoler les boutons à la souris affiche des informations détaillées sur l'action ou l'état actuel de la sonde.
-* 🛠️ **Éditeur Visuel Intégré :**
-  * Configuration simple et rapide grâce au formulaire natif `ha-form`.
+* 🔄 **Dual Interface :**
+  * Adapts automatically according to the device type chosen (Heating with presets or Air conditioning with complex modes).
+* 🎛️ **Advanced AC Controls :**
+  * Integrated management of ventilation speed (`fan_mode`) and oscillation of horizontal/vertical shutters (`swing_mode`).
+* 🎨 **Clear State Indicators :** 
+  * Black icon background when the device is active, solid grey when it is (`off`).
+  * Presets (heating) are hidden when the thermostat is turned (`off`).
+  * The +/- temperature setting is inactive when the thermostat is switched (`off`).
+  * A color pulse badge (orange for heating, blue for air conditioning) indicates the actual activity. (`hvac_action`).
+* 🐭 **Contextual Tooltips :**
+  * Hovering the mouse over the buttons displays detailed information about the action or current state of the probe.
+* 🛠️ **Integrated Visual Editor :**
+  * Quick and easy setup with the native form `ha-form`.
 
 ---
 
@@ -52,7 +52,7 @@ Une carte Home Assistant (Lovelace) universelle, moderne et ultra-réactive pour
 
 ---
 
-## 🛠️ Configuration exemple
+## 🛠️ Example configuration
 
 Thermostat-Card includes a visual editor that appears when you add or edit the card through the Home Assistant UI.
 
@@ -61,46 +61,46 @@ or simply add this block to your dashboard in YAML mode :
 ```yaml
 type: custom:thermostat-card
 device_type: heater
-entity: climate.thermostat_salon_cuisine
-title: Thermostat Salon/Cuisine
-current_temp_sensor: sensor.temperature_salon_cuisine
+entity: climate.thermostat_living_room
+title: Thermostat Living room
+current_temp_sensor: sensor.temperature_living_room
 ```
 
 
 | Option | Type | Requis | Par défaut | Description |
 | :--- | :--- | :---: | :---: | :--- |
-| `device_type` | string | **yes** | - | Doit être obligatoirement `heater or ac`. |
-| `type` | string | **yes** | - | Doit être obligatoirement `custom:thermostat-card`. |
-| `entity` | string | **yes** | - | L'identifiant de votre entité de chauffage (ex: `climate.thermostat_salon_cuisine`). |
-| `title` | string | No | - | Le titre personnalisé affiché en haut de la carte (ex: `Thermostat Salon/Cuisine`). |
-| `current_temp_sensor` | string | No | - | Le capteur de température à afficher en haut de la carte (ex: `sensor.temperature_salon_cuisine`). |
+| `device_type` | string | **yes** | - | Must be: `heater or ac`. |
+| `type` | string | **yes** | - | Must be: `custom:thermostat-card`. |
+| `entity` | string | **yes** | - | Your heating or air conditioning entity (ex: `climate.thermostat_living_room`). |
+| `title` | string | No | - | Custom title displayed at the top of the map (ex: `Living Room Thermostat`). |
+| `current_temp_sensor` | string | No | - | Ambiante temperature sensor (ex: `sensor.temperature_living_room`). |
 
 ---
 
-## 📸 Captures d'écran
+## 📸 Screenshot
 
 <div style="text-align: center;">
-  <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu carte Thermostat chauffage en mode <b>off</b></p>
+  <p style="font-style: italic; color: gray; margin-top: 8px;">Preview: Thermostat heating in "<b>off</b>" mode</p>
   <img src="https://raw.githubusercontent.com/dynaloo/thermostat-card/main/images/Capture-1.png" alt="Aperçu du Thermostat>" width="400" style="display: block; margin: 0 auto;">
 </div>
 
 <div style="text-align: center;">
-  <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu carte Thermostat chauffage en mode <b>on</b></p>
+  <p style="font-style: italic; color: gray; margin-top: 8px;">Preview: Thermostat heating in "<b>on</b>" mode</p>
   <img src="https://raw.githubusercontent.com/dynaloo/thermostat-card/main/images/Capture-2.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
 </div>
 
 <div style="text-align: center;">
-  <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu carte Thermostat chauffage en mode <b>on</b> et <b>actif</b> (affichage point rouge clignotant sur l'icone</p>
+  <p style="font-style: italic; color: gray; margin-top: 8px;">Preview: Thermostat heating in "<b>on</b>" mode and "<b>Active</b>" (flashing red dot displayed on the icon)</p>
   <img src="https://raw.githubusercontent.com/dynaloo/thermostat-card/main/images/Capture-3.png" alt="Aperçu du Thermostat" width="400" style="display: block; margin: 0 auto;">
 </div>
 
 <div style="text-align: center;">
-  <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu carte Thermostat climatiseur en mode <b>off</b></p>
+  <p style="font-style: italic; color: gray; margin-top: 8px;">Preview: Air conditioner thermostat in "<b>off</b>" mode</p>
   <img src="https://raw.githubusercontent.com/dynaloo/thermostat-card/main/images/Capture-4.png" alt="Aperçu du Thermostat>" width="400" style="display: block; margin: 0 auto;">
 </div>
 
 <div style="text-align: center;">
-  <p style="font-style: italic; color: gray; margin-top: 8px;">Aperçu carte Thermostat climatiseur en mode <b>ventilation</b></p>
+  <p style="font-style: italic; color: gray; margin-top: 8px;">Preview: Air conditioner thermostat in "<b>Fan only</b>" mode</p>
   <img src="https://raw.githubusercontent.com/dynaloo/thermostat-card/main/images/Capture-5.png" alt="Aperçu du Thermostat>" width="400" style="display: block; margin: 0 auto;">
 </div>
 ---
