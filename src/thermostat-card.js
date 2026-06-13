@@ -171,6 +171,7 @@ class ThermostatCard extends LitElement {
     const fanModes = attributes.fan_modes ?? ["auto", "low", "medium", "high"];
     const swingModes = attributes.swing_modes ?? ["off", "vertical", "horizontal", "both"];
     const swingHorizontalModes = attributes.swing_horizontal_modes ?? ["off", "horizontal"];
+    const presetModes = attributes.preset_modes ?? [];
 
     const isHeating = attributes.hvac_action === "heating";
     const isCooling = attributes.hvac_action === "cooling";
@@ -309,26 +310,63 @@ class ThermostatCard extends LitElement {
                 <div class="buttons3">
                   ${deviceType === "heater"
                     ? html`
-                        <button class="btn" title="Passer en mode Confort" @click="${() => this._setPreset('comfort')}">
-                          <ha-icon icon="mdi:sofa" style="color: ${preset === 'comfort' ? 'rgba(255, 165, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Confort</span>
-                        </button>
-                        <button class="btn" title="Passer en mode Éco" @click="${() => this._setPreset('eco')}">
-                          <ha-icon icon="mdi:leaf" style="color: ${preset === 'eco' ? 'rgba(0, 128, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Eco</span>
-                        </button>
-                        <button class="btn" title="Passer en mode Hors-gel" @click="${() => this._setPreset('frost')}">
-                          <ha-icon icon="mdi:snowflake-thermometer" style="color: ${preset === 'frost' ? 'rgba(0, 191, 255, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Hors gel</span>
-                        </button>
-                        <button class="btn" title="Passer en mode Boost" @click="${() => this._setPreset('boost')}">
-                          <ha-icon icon="mdi:rocket-launch" style="color: ${preset === 'boost' ? 'rgba(255, 0, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Boost</span>
-                        </button>
-                        <button class="btn" title="Passer en commande Manuelle" @click="${() => this._setPreset('none')}">
-                          <ha-icon icon="mdi:hand-back-right-outline" style="color: ${preset === 'none' ? 'rgba(255, 255, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Manuel</span>
-                        </button>
+                        ${presetModes.map((pMode) => {
+                          let icon = "mdi:bookmark";
+                          let color = "rgba(128, 128, 128, 1)";
+                          let label = pMode;
+
+                          switch (pMode) {
+                            case "comfort":
+                              icon = "mdi:sofa";
+                              color = "rgba(255, 165, 0, 1)";
+                              label = "Confort";
+                              break;
+                            case "eco":
+                              icon = "mdi:leaf";
+                              color = "rgba(0, 128, 0, 1)";
+                              label = "Eco";
+                              break;
+                            case "frost":
+                              icon = "mdi:snowflake-thermometer";
+                              color = "rgba(0, 191, 255, 1)";
+                              label = "Hors gel";
+                              break;
+                            case "boost":
+                              icon = "mdi:rocket-launch";
+                              color = "rgba(255, 0, 0, 1)";
+                              label = "Boost";
+                              break;
+                            case "none":
+                              icon = "mdi:hand-back-right-outline";
+                              color = "rgba(255, 255, 0, 1)";
+                              label = "Manuel";
+                              break;
+                            case "home":
+                              icon = "mdi:home";
+                              color = "rgba(33, 150, 243, 1)";
+                              label = "Maison";
+                              break;
+                            case "away":
+                              icon = "mdi:walk";
+                              color = "rgba(156, 39, 176, 1)";
+                              label = "Absent";
+                              break;
+                            case "sleep":
+                              icon = "mdi:bed";
+                              color = "rgba(63, 81, 181, 1)";
+                              label = "Nuit";
+                              break;
+                          }
+
+                          const isActive = preset === pMode;
+
+                          return html`
+                            <button class="btn" title="Passer en mode ${label}" @click="${() => this._setPreset(pMode)}">
+                              <ha-icon icon="${icon}" style="color: ${isActive ? color : 'rgba(128, 128, 128, 1)'}"></ha-icon>
+                              <span>${label}</span>
+                            </button>
+                          `;
+                        })}
                       `
                     : html`
                         <button class="btn" title="Mode : Chauffage" @click="${() => this._setHvacMode('heat')}">
@@ -462,8 +500,8 @@ class ThermostatCard extends LitElement {
       .buttons2 { display: flex; justify-content: center; gap: 20px; }
       .buttons2 .btn { width: 30% !important; flex: none !important; }
       
-      .buttons3 { display: flex; justify-content: space-between; gap: 5px; margin-bottom: 4px; }
-      .btn { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 4px; border-radius: 8px; color: var(--primary-text-color); flex: 1; }
+      .buttons3 { display: flex; justify-content: space-between; gap: 5px; margin-bottom: 4px; flex-wrap: wrap; }
+      .btn { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 4px; border-radius: 8px; color: var(--primary-text-color); flex: 1; min-width: 50px; }
       .btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); }
       .btn:disabled { opacity: 0.3; cursor: not-allowed; }
       .btn ha-icon { font-size: 30px !important; --mdc-icon-size: 30px !important; width: 30px !important; height: 30px !important; display: flex; }
