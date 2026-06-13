@@ -24,16 +24,7 @@ class ThermostatCardEditor extends LitElement {
       return html``;
     }
 
-    const states = this.hass.states ?? {};
-    
-    const climateEntities = Object.keys(states)
-      .filter((eid) => eid.split(".")[0] === "climate")
-      .sort();
-
-    const sensorEntities = Object.keys(states)
-      .filter((eid) => eid.split(".")[0] === "sensor")
-      .sort();
-
+    // Utilisation des sélecteurs natifs de Home Assistant pour une performance optimale
     const schema = [
       {
         name: "title",
@@ -54,23 +45,12 @@ class ThermostatCardEditor extends LitElement {
       },
       {
         name: "entity",
-        selector: {
-          select: {
-            options: climateEntities.map((eid) => ({ value: eid, label: eid }))
-          }
-        },
+        selector: { entity: { domain: "climate" } },
         label: "Entité Thermostat (Obligatoire)"
       },
       {
         name: "current_temp_sensor",
-        selector: {
-          select: {
-            options: [
-              { value: "", label: "-- Aucun --" },
-              ...sensorEntities.map((eid) => ({ value: eid, label: eid }))
-            ]
-          }
-        },
+        selector: { entity: { domain: "sensor" } },
         label: "Capteur de température réelle (Optionnel)"
       }
     ];
@@ -283,9 +263,9 @@ class ThermostatCard extends LitElement {
               }
               
               <div class="controls">
-                <button class="btn-inc-dec" title="Diminuer la consigne de 0.5°C" .disabled="${mode === 'unknown' || mode === 'off'}" @click="${() => this._setTemp(stateObj, -0.5)}"><ha-icon icon="mdi:minus"></ha-icon></button>
+                <button class="btn-inc-dec" title="Diminuer la consigne" .disabled="${mode === 'unknown' || mode === 'off'}" @click="${() => this._setTemp(stateObj, -1)}"><ha-icon icon="mdi:minus"></ha-icon></button>
                 <span class="temp-display" title="Température de consigne ciblée">${targetTemp}°C</span>
-                <button class="btn-inc-dec" title="Augmenter la consigne de 0.5°C" .disabled="${mode === 'unknown' || mode === 'off'}" @click="${() => this._setTemp(stateObj, 0.5)}"><ha-icon icon="mdi:plus"></ha-icon></button>
+                <button class="btn-inc-dec" title="Augmenter la consigne" .disabled="${mode === 'unknown' || mode === 'off'}" @click="${() => this._setTemp(stateObj, 1)}"><ha-icon icon="mdi:plus"></ha-icon></button>
               </div>
             </div>
           </div>
@@ -447,10 +427,15 @@ class ThermostatCard extends LitElement {
     this.hass.callService("climate", "set_preset_mode", { entity_id: this.config.entity, preset_mode: preset });
   }
 
-  _setTemp(stateObj, change) {
+  _setTemp(stateObj, direction) {
     if (!this.config?.entity) return;
     const currentTemp = stateObj?.attributes?.temperature ?? stateObj?.attributes?.target_temp ?? 20;
-    this.hass.callService("climate", "set_temperature", { entity_id: this.config.entity, temperature: currentTemp + change });
+    // Récupération dynamique du pas de configuration (0.5 ou 1 par défaut)
+    const step = stateObj?.attributes?.target_temp_step ?? 0.5;
+    this.hass.callService("climate", "set_temperature", { 
+      entity_id: this.config.entity, 
+      temperature: currentTemp + (direction * step) 
+    });
   }
 
   _setFanMode(fanMode) {
@@ -493,15 +478,17 @@ class ThermostatCard extends LitElement {
       .btn-inc-dec ha-icon { font-size: 16px !important; --mdc-icon-size: 16px !important; width: 16px !important; height: 16px !important; display: flex; }
       .temp-display { font-size: 16px; font-weight: bold; min-width: 50px; text-align: center; cursor: default; }
       
-      .buttons2 { display: flex; justify-content: center; gap: 20px; }
-      .buttons2 .btn { width: 30% !important; flex: none !important; }
+      .buttons2 { display: flex; justify-content: center; gap: 20px; margin-bottom: 8px; }
+      .buttons2 .btn { width: 45% !important; flex: none !important; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); }
+      .buttons2 .btn.active-heat { background: rgba(255, 0, 0, 0.1) !important; border: 1px solid rgba(255, 0, 0, 0.3); }
+      .buttons2 .btn.active-off { background: rgba(255, 255, 255, 0.1) !important; border: 1px solid rgba(255, 255, 255, 0.3); }
       
       .buttons3 { display: flex; justify-content: space-between; gap: 5px; margin-bottom: 4px; flex-wrap: wrap; }
-      .btn { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 4px; border-radius: 8px; color: var(--primary-text-color); flex: 1; min-width: 50px; }
+      .btn { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 6px 4px; border-radius: 8px; color: var(--primary-text-color); flex: 1; min-width: 50px; transition: background 0.2s; }
       .btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); }
       .btn:disabled { opacity: 0.3; cursor: not-allowed; }
       .btn ha-icon { font-size: 30px !important; --mdc-icon-size: 30px !important; width: 30px !important; height: 30px !important; display: flex; }
-      .btn span { font-size: 14px !important; font-weight: 500 !important; display: inline-block; margin-top: 2px; }
+      .btn span { font-size: 13px !important; font-weight: 500 !important; display: inline-block; margin-top: 2px; text-transform: capitalize; }
 
       .ac-advanced-controls { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); }
       .control-dropdown { display: flex; align-items: center; gap: 4px; background: rgba(255, 255, 255, 0.05); padding: 6px 10px; border-radius: 8px; flex: 1; justify-content: center; cursor: help; }
