@@ -110,7 +110,7 @@ customElements.define("thermostat-card-editor", ThermostatCardEditor);
 
 
 // ==========================================
-// 2. LA CARTE PRINCIPALE AVEC AFFICHAGE DYNAMIQUE
+// 2. LA CARTE PRINCIPALE AVEC AFFICHAGE 100% DYNAMIQUE
 // ==========================================
 class ThermostatCard extends LitElement {
   static get properties() {
@@ -172,6 +172,7 @@ class ThermostatCard extends LitElement {
     const swingModes = attributes.swing_modes ?? ["off", "vertical", "horizontal", "both"];
     const swingHorizontalModes = attributes.swing_horizontal_modes ?? ["off", "horizontal"];
     const presetModes = attributes.preset_modes ?? [];
+    const hvacModes = attributes.hvac_modes ?? [];
 
     const isHeating = attributes.hvac_action === "heating";
     const isCooling = attributes.hvac_action === "cooling";
@@ -316,46 +317,14 @@ class ThermostatCard extends LitElement {
                           let label = pMode;
 
                           switch (pMode) {
-                            case "comfort":
-                              icon = "mdi:sofa";
-                              color = "rgba(255, 165, 0, 1)";
-                              label = "Confort";
-                              break;
-                            case "eco":
-                              icon = "mdi:leaf";
-                              color = "rgba(0, 128, 0, 1)";
-                              label = "Eco";
-                              break;
-                            case "frost":
-                              icon = "mdi:snowflake-thermometer";
-                              color = "rgba(0, 191, 255, 1)";
-                              label = "Hors gel";
-                              break;
-                            case "boost":
-                              icon = "mdi:rocket-launch";
-                              color = "rgba(255, 0, 0, 1)";
-                              label = "Boost";
-                              break;
-                            case "none":
-                              icon = "mdi:hand-back-right-outline";
-                              color = "rgba(255, 255, 0, 1)";
-                              label = "Manuel";
-                              break;
-                            case "home":
-                              icon = "mdi:home";
-                              color = "rgba(33, 150, 243, 1)";
-                              label = "Maison";
-                              break;
-                            case "away":
-                              icon = "mdi:walk";
-                              color = "rgba(156, 39, 176, 1)";
-                              label = "Absent";
-                              break;
-                            case "sleep":
-                              icon = "mdi:bed";
-                              color = "rgba(63, 81, 181, 1)";
-                              label = "Nuit";
-                              break;
+                            case "comfort": icon = "mdi:sofa"; color = "rgba(255, 165, 0, 1)"; label = "Confort"; break;
+                            case "eco": icon = "mdi:leaf"; color = "rgba(0, 128, 0, 1)"; label = "Eco"; break;
+                            case "frost": icon = "mdi:snowflake-thermometer"; color = "rgba(0, 191, 255, 1)"; label = "Hors gel"; break;
+                            case "boost": icon = "mdi:rocket-launch"; color = "rgba(255, 0, 0, 1)"; label = "Boost"; break;
+                            case "none": icon = "mdi:hand-back-right-outline"; color = "rgba(255, 255, 0, 1)"; label = "Manuel"; break;
+                            case "home": icon = "mdi:home"; color = "rgba(33, 150, 243, 1)"; label = "Maison"; break;
+                            case "away": icon = "mdi:walk"; color = "rgba(156, 39, 176, 1)"; label = "Absent"; break;
+                            case "sleep": icon = "mdi:bed"; color = "rgba(63, 81, 181, 1)"; label = "Nuit"; break;
                           }
 
                           const isActive = preset === pMode;
@@ -369,30 +338,57 @@ class ThermostatCard extends LitElement {
                         })}
                       `
                     : html`
-                        <button class="btn" title="Mode : Chauffage" @click="${() => this._setHvacMode('heat')}">
-                          <ha-icon icon="mdi:fire" style="color: ${mode === 'heat' ? 'rgba(255, 100, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Heat</span>
-                        </button>
-                        <button class="btn" title="Mode : Climatisation (Froid)" @click="${() => this._setHvacMode('cool')}">
-                          <ha-icon icon="mdi:snowflake" class="${mode === 'cool' ? 'blink' : ''}" style="color: ${mode === 'cool' ? 'rgba(0, 191, 255, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Cool</span>
-                        </button>
-                        <button class="btn" title="Mode : Ventilation seule" @click="${() => this._setHvacMode('fan_only')}">
-                          <ha-icon icon="mdi:fan" class="${mode === 'fan_only' ? 'spin-animation' : ''}" style="color: ${mode === 'fan_only' ? 'rgba(0, 255, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Fan</span>
-                        </button>
-                        <button class="btn" title="Mode : Déshumidification" @click="${() => this._setHvacMode('dry')}">
-                          <ha-icon icon="mdi:water-percent" style="color: ${mode === 'dry' ? 'rgba(0, 128, 128, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Dry</span>
-                        </button>
-                        <button class="btn" title="Mode : Gestion automatique (Heat/Cool)" @click="${() => this._setHvacMode('heat_cool')}">
-                          <ha-icon icon="mdi:autorenew" style="color: ${mode === 'heat_cool' ? 'rgba(202, 206, 0, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Auto</span>
-                        </button>
-                        <button class="btn" title="Éteindre l'appareil" @click="${() => this._setHvacMode('off')}">
-                          <ha-icon icon="mdi:power" style="color: ${mode === 'off' ? 'rgba(255, 255, 255, 1)' : 'rgba(128, 128, 128, 1)'}"></ha-icon>
-                          <span>Stop</span>
-                        </button>
+                        ${hvacModes.map((hMode) => {
+                          let icon = "mdi:help-circle-outline";
+                          let color = "rgba(128, 128, 128, 1)";
+                          let label = hMode;
+                          let isFan = false;
+                          let isBlink = false;
+
+                          switch (hMode) {
+                            case "heat":
+                              icon = "mdi:fire";
+                              color = "rgba(255, 100, 0, 1)";
+                              label = "Heat";
+                              break;
+                            case "cool":
+                              icon = "mdi:snowflake";
+                              color = "rgba(0, 191, 255, 1)";
+                              label = "Cool";
+                              isBlink = (mode === "cool");
+                              break;
+                            case "fan_only":
+                              icon = "mdi:fan";
+                              color = "rgba(0, 255, 0, 1)";
+                              label = "Fan";
+                              isFan = (mode === "fan_only");
+                              break;
+                            case "dry":
+                              icon = "mdi:water-percent";
+                              color = "rgba(0, 128, 128, 1)";
+                              label = "Dry";
+                              break;
+                            case "heat_cool":
+                              icon = "mdi:autorenew";
+                              color = "rgba(202, 206, 0, 1)";
+                              label = "Auto";
+                              break;
+                            case "off":
+                              icon = "mdi:power";
+                              color = "rgba(255, 255, 255, 1)";
+                              label = "Stop";
+                              break;
+                          }
+
+                          const isActive = mode === hMode;
+
+                          return html`
+                            <button class="btn" title="Mode : ${label}" @click="${() => this._setHvacMode(hMode)}">
+                              <ha-icon icon="${icon}" class="${isFan ? 'spin-animation' : ''} ${isBlink ? 'blink' : ''}" style="color: ${isActive ? color : 'rgba(128, 128, 128, 1)'}"></ha-icon>
+                              <span>${label}</span>
+                            </button>
+                          `;
+                        })}
                       `
                   }
                 </div>
