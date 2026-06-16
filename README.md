@@ -1,6 +1,6 @@
 # ⚠️ This repository is obsolete. :
 <div align="left">
-  <p><i><a href="https://github.com/Dynaloo/thermostat-simple-card">Click here to access the new thermostat map repository</a> </i></p>
+  <p><i><a href="https://github.com/Dynaloo/thermostat-simple-card">Click here to access the new thermostat card repository</a> </i></p>
 </div>
 
 ---
