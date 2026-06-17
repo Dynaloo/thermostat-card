@@ -6,7 +6,7 @@
 ---
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs)
-![Version](https://badgen.net/github/release/Dynaloo/thermostat-card?color=blue)
+[![GitHub release](https://img.shields.io/github/v/release/Dynaloo/thermostat-card)](https://github.com/Dynaloo/thermostat-card/releases)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Dynaloo/thermostat-card/total?label=Downloads)
 [![HACF Forum](https://img.shields.io/badge/HACF-Forum%20Francophone-41BDF5?logo=home-assistant)](https://forum.hacf.fr/)
 
